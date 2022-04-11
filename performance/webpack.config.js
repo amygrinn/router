@@ -2,7 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const jsonImporter = require('json2scss-map-webpack-importer');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const CssoWebpackPlugin = require('csso-webpack-plugin').default;
 
 const NAME = process.env.NAME || 'output';
 
@@ -33,13 +33,13 @@ module.exports = {
   },
   optimization: {
     minimize: true,
-    minimizer: ['...', new CssMinimizerPlugin()],
   },
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: `${NAME}.css`,
     }),
+    new CssoWebpackPlugin(),
   ],
   devServer: {
     historyApiFallback: true,

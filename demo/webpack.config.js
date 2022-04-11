@@ -4,9 +4,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const jsonImporter = require('json2scss-map-webpack-importer');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const webpack = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const CssoWebpackPlugin = require('csso-webpack-plugin').default;
 
 const PROD = process.env.NODE_ENV === 'production';
 const { GITHUB_PAGES, HTTP_SERVER, ANALYZE, BASE_URL } = process.env;
@@ -38,8 +38,7 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               sassOptions: {
-                importer: jsonImporter(),
-                style: PROD ? 'compressed' : 'expanded',
+                importer: jsonImporter()
               },
             },
           },
@@ -52,7 +51,6 @@ module.exports = {
   },
   optimization: {
     minimize: true,
-    minimizer: ['...', new CssMinimizerPlugin()],
   },
   externals: { react: 'React', 'react-dom': 'ReactDOM' },
   devtool: 'source-map',
@@ -61,6 +59,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
     }),
+    new CssoWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'index.html'),
       filename: HTML_FILENAME,
