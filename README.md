@@ -19,14 +19,14 @@ The router layout will share as much html as it can between the different routes
 
   | # of routes  | depth | css (gzipped) |
   | ------------ | ----- | ------------- |
-  | 1            | 1     | 122 B         |
-  | 20           | 1     | 415 B         |
-  | 100          | 1     | 1.70 KB       |
-  | 20           | 2     | 752 B         |
-  | 20           | 3     | 1.36 KB       |
-  | 20           | 4     | 2.57 KB       |
-  | 20           | 5     | 5.22 KB       |
-  | Demo project | 4     | 4.12 KB       |
+  | 1            | 1     | 116 B         |
+  | 20           | 1     | 398 B         |
+  | 100          | 1     | 1596 KB       |
+  | 20           | 2     | 702 B         |
+  | 20           | 3     | 1312 B        |
+  | 20           | 4     | 2440 B        |
+  | 20           | 5     | 4476 B        |
+  | Demo project | 4     | 3967 B        |
 
 - Specify complex route logic for elements for more reuse\
   The relative, partial, and exclusionary syntax can be used together to shorten jsx templates considerably. You can reuse the same component for multiple routes because no components are ever actually gone when the route changes.
@@ -43,14 +43,14 @@ See the `demo/webpack.config.js` file for an example of using react and sass wit
 ## Installation:
 
 ```cmd
-npm i --save @tygr/router node-sass-json-importer
+npm i --save-dev @tygr/router json2scss-map-webpack-importer
 ```
 
 ## Step 1: Define your router
 
-The router needs to be defined exactly the same for your sass code and javascript. The easiest way to do that is to use the [node-sass-json-importer](https://www.npmjs.com/package/node-sass-json-importer) and define your router in a separate file that can be loaded by both sass and javascript. You can see an example of this in the `demo` folder. If using the importer, strings must be escaped by single quotes, ie `"'/page'"` rather than `"/page"`.
+The router needs to be defined exactly the same for your sass code and javascript. The easiest way to do that is to use the [json2scss-map-webpack-importer](https://gitlab.com/tygrdev/json2scss-map-webpack-importer) package and define your router in a separate file that can be loaded by both sass and javascript. You can see an example of this in the `demo` folder.
 
-The router definition must export a variable named `router` or, if using json, have a top-level key named `router`. Within that variable, the following properties are available:
+The name of the router json file will be the name of the variable imported into sass.
 
 **Router**
 
@@ -73,21 +73,21 @@ _Pages can be specified by a string or by using the following interface_
 Here is an example router config:
 
 ```js
-module.exports.router = {
-  fallback: "'/404'",
+module.exports = {
+  fallback: "/404",
   pages: [
-    "'/'", // Home page
-    "'/page-1'",
+    "/", // Home page
+    "/page-1",
     {
-      path: "'/page-2'",
+      path: "/page-2",
       children: {
-        "'/child-1'",
-        "'/child-2'",
+        "/child-1",
+        "/child-2",
       }
     },
     {
-      path: "'/redirect'",
-      redirectTo: "'/page-2/child-2'", // Could also relative path: 'page-2/child-2'
+      path: "/redirect",
+      redirectTo: "/page-2/child-2", // Could also relative path: 'page-2/child-2'
     }
   ]
 };
