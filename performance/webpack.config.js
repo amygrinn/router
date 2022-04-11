@@ -1,7 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const jsonImporter = require('node-sass-json-importer');
+const jsonImporter = require('json2scss-map-webpack-importer');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const NAME = process.env.NAME || 'output';

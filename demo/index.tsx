@@ -5,8 +5,8 @@ import './main.scss';
 import routerConfig from './router.json';
 
 function App() {
-  routerConfig.router['baseUrl'] = process.env.BASE_URL;
-  const [router, goto] = useRouter(routerConfig.router);
+  routerConfig['baseUrl'] = process.env.BASE_URL;
+  const [router, goto] = useRouter(routerConfig);
 
   return (
     <div>

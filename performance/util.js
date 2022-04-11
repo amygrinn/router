@@ -18,7 +18,7 @@ const getExcelColumn = (x) => {
     } while (order >= 0);
   } while (x > 0);
 
-  return `'${result}'`;
+  return result;
 };
 
 const getExcelColumns = (num) => {
@@ -33,7 +33,7 @@ const getExcelColumns = (num) => {
 
 const getPages = (paths, depth) => {
   if (depth === 1) return paths;
-  return [{ path: "'/a'", children: getPages(paths, depth - 1) }];
+  return [{ path: '/a', children: getPages(paths, depth - 1) }];
 };
 
 module.exports = { getPages, getExcelColumns };

@@ -3,7 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const jsonImporter = require('node-sass-json-importer');
+const jsonImporter = require('json2scss-map-webpack-importer');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const webpack = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -39,7 +39,7 @@ module.exports = {
             options: {
               sassOptions: {
                 importer: jsonImporter(),
-                outputStyle: PROD ? 'compressed' : 'expanded',
+                style: PROD ? 'compressed' : 'expanded',
               },
             },
           },

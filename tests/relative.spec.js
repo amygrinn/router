@@ -4,8 +4,8 @@ describe('Relative routes', () => {
   const router = {
     pages: [
       {
-        path: "'/a'",
-        children: ["'/b'", "'/d'"],
+        path: '/a',
+        children: ['/b', '/d'],
       },
     ],
   };
@@ -26,10 +26,15 @@ describe('Relative routes', () => {
   });
   after(() => closeServer());
 
-  it(`Sets the route to '/a/b'`, writeTestCase(router, '/a/b', tests));
-  it(`Shows '^/a -> b'`, assertVisible('b'));
-  it(`Hides '^/a -> d'`, assertHidden('d'));
-  it(`Sets the route to '/a/d'`, writeTestCase(router, '/a/d', tests));
-  it(`Hides '^/a -> b'`, assertHidden('b'));
-  it(`Shows '^/a -> d'`, assertVisible('d'));
+  describe('Current route: /a/b', () => {
+    before(writeTestCase(router, '/a/b', tests));
+    it(`Hides '^/a -> d'`, assertHidden('d'));
+    it(`Shows '^/a -> b'`, assertVisible('b'));
+  });
+
+  describe('Current route: /a/d', () => {
+    before(writeTestCase(router, '/a/d', tests));
+    it(`Hides '^/a -> b'`, assertHidden('b'));
+    it(`Shows '^/a -> d'`, assertVisible('d'));
+  });
 });

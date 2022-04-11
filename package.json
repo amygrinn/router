@@ -2,16 +2,98 @@
   "name": "@tygr/router",
   "version": "1.0.3",
   "description": "Router for tygr",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tylergrinn/tygr-router.git"
+  },
+  "author": "Tyler Grinn",
   "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "run-s clean ts demo",
+    "clean": "rimraf lib dist",
+    "demo": "webpack --config demo/webpack.config",
+    "demo:w": "webpack serve --config demo/webpack.config",
+    "lint": "npm run lint:fix",
+    "lint:check": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "mocha": "mocha tests/**/*.spec.js --no-colors --exit",
+    "performance": "webpack --config performance/webpack.config",
+    "prettier": "npm run prettier:fix",
+    "prettier:check": "prettier -c .",
+    "prettier:fix": "prettier --write .",
+    "quality": "npm run quality:fix",
+    "quality:check": "run-s --print-label --silent lint:check prettier:check",
+    "quality:fix": "run-p --print-label --silent lint:fix prettier:fix",
+    "serve": "http-server dist",
+    "start": "npm-run-all ts -p ts:w demo:w",
+    "test": "run-s test:*",
+    "test:absolute": "npm run mocha -- -f 'Absolute routes'",
+    "test:exclusion": "npm run mocha -- -f 'Exclusion syntax'",
+    "test:grandchildren": "npm run mocha -- -f 'Relative grandchildren'",
+    "test:partial-exclusion": "npm run mocha -- -f 'Partial exclusion syntax'",
+    "test:relative": "npm run mocha -- -f 'Relative routes'",
+    "test:relative-exclusion": "npm run mocha -- -f 'Relative exclusion syntax'",
+    "ts": "tsc",
+    "ts:w": "npm run ts -- -w"
+  },
   "files": [
+    "_index.scss",
     "lib",
-    "sass",
-    "_index.scss"
+    "sass"
   ],
-  "browserslist": [
-    "defaults"
+  "keywords": [
+    "react",
+    "login",
+    "webpack"
   ],
+  "peerDependencies": {
+    "react": "^18"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
+    "@babel/runtime": "^7.12.5",
+    "@types/react": "^18.0.1",
+    "@types/react-dom": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.18.0",
+    "@typescript-eslint/parser": "^5.18.0",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.1",
+    "css-minimizer-webpack-plugin": "^3.4.1",
+    "dotenv": "^16.0.0",
+    "eslint": "^8.13.0",
+    "eslint-config-alloy": "^4.5.1",
+    "eslint-plugin-react": "^7.21.2",
+    "html-webpack-plugin": "^5.5.0",
+    "json2scss-map-webpack-importer": "file:../json2scss-map-webpack-importer",
+    "mini-css-extract-plugin": "^2.6.0",
+    "mocha": "^9.2.2",
+    "npm-run-all": "^4.1.5",
+    "playwright": "^1.6.2",
+    "prettier": "^2.6.2",
+    "prettier-plugin-organize-imports": "^2.3.4",
+    "prettier-plugin-package": "^1.3.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "rimraf": "^3.0.2",
+    "sass": "^1.50.0",
+    "sass-loader": "^12.6.0",
+    "serve-static": "^1.14.1",
+    "style-loader": "^3.3.1",
+    "typescript": "^4.0.3",
+    "webpack": "^5.4.0",
+    "webpack-bundle-analyzer": "^4.2.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.8.1"
+  },
+  "types": "lib/index.d.ts",
   "babel": {
     "presets": [
       "@babel/preset-env",
@@ -22,6 +104,9 @@
       "@babel/plugin-transform-runtime"
     ]
   },
+  "browserslist": [
+    "defaults"
+  ],
   "eslintConfig": {
     "extends": [
       "alloy",
@@ -58,82 +143,5 @@
   },
   "prettier": {
     "singleQuote": true
-  },
-  "scripts": {
-    "test": "mocha tests/**/*.spec.js --exit",
-    "test:w": "npm run test -- -w",
-    "clean": "rimraf lib dist",
-    "ts": "tsc",
-    "ts:w": "npm run ts -- -w",
-    "demo": "webpack --config demo/webpack.config",
-    "demo:w": "webpack-dev-server --config demo/webpack.config",
-    "performance": "webpack --config performance/webpack.config",
-    "build": "run-s clean ts demo",
-    "serve": "http-server dist",
-    "start": "npm-run-all ts -p ts:w demo:w",
-    "lint:check": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "lint": "npm run lint:fix",
-    "prettier:check": "prettier -c .",
-    "prettier:fix": "prettier --write .",
-    "prettier": "npm run prettier:fix",
-    "quality:check": "run-s --print-label --silent lint:check prettier:check",
-    "quality:fix": "run-p --print-label --silent lint:fix prettier:fix",
-    "quality": "npm run quality:fix"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tylergrinn/tygr-router.git"
-  },
-  "keywords": [
-    "react",
-    "login",
-    "webpack"
-  ],
-  "author": "Tyler Grinn",
-  "license": "ISC",
-  "peerDependencies": {
-    "react": "^18"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/plugin-transform-runtime": "^7.12.1",
-    "@babel/preset-env": "^7.11.5",
-    "@babel/preset-react": "^7.10.4",
-    "@babel/preset-typescript": "^7.10.4",
-    "@babel/runtime": "^7.12.5",
-    "@types/react": "^18.0.1",
-    "@types/react-dom": "^18.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.18.0",
-    "@typescript-eslint/parser": "^5.18.0",
-    "babel-eslint": "^10.1.0",
-    "babel-loader": "^8.1.0",
-    "clean-webpack-plugin": "^4.0.0",
-    "css-loader": "^6.7.1",
-    "css-minimizer-webpack-plugin": "^3.4.1",
-    "dotenv": "^16.0.0",
-    "eslint": "^8.13.0",
-    "eslint-config-alloy": "^4.5.1",
-    "eslint-plugin-react": "^7.21.2",
-    "html-webpack-plugin": "^5.5.0",
-    "mini-css-extract-plugin": "^2.6.0",
-    "mocha": "^9.2.2",
-    "node-sass-json-importer": "^4.3.0",
-    "npm-run-all": "^4.1.5",
-    "playwright": "^1.6.2",
-    "prettier": "^2.1.2",
-    "prettier-plugin-organize-imports": "^2.3.4",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "rimraf": "^3.0.2",
-    "sass": "^1.26.11",
-    "sass-loader": "^12.6.0",
-    "serve-static": "^1.14.1",
-    "style-loader": "^3.3.1",
-    "typescript": "^4.0.3",
-    "webpack": "^5.4.0",
-    "webpack-bundle-analyzer": "^4.2.0",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.8.1"
   }
 }

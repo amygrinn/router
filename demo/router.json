@@ -1,41 +1,39 @@
 {
-  "router": {
-    "fallback": "'/404'",
-    "pages": [
-      "'/'",
-      {
-        "path": "'/i'",
-        "children": [
-          "'/i0'",
-          "'/i1'",
-          {
-            "path": "'/j'",
-            "children": [
-              "'/j0'",
-              "'/j1'",
-              {
-                "path": "'/k'",
-                "children": ["'/k0'", "'/k1'"]
-              }
-            ]
-          }
-        ]
-      },
-      "'/page1'",
-      "'/page2'",
-      {
-        "path": "'/redirect'",
-        "children": [
-          {
-            "path": "'/absolute'",
-            "redirectTo": "'/i/i0'"
-          },
-          {
-            "path": "'/relative'",
-            "redirectTo": "'../i/i1'"
-          }
-        ]
-      }
-    ]
-  }
+  "fallback": "/404",
+  "pages": [
+    "/",
+    {
+      "path": "/i",
+      "children": [
+        "/i0",
+        "/i1",
+        {
+          "path": "/j",
+          "children": [
+            "/j0",
+            "/j1",
+            {
+              "path": "/k",
+              "children": ["/k0", "/k1"]
+            }
+          ]
+        }
+      ]
+    },
+    "/page1",
+    "/page2",
+    {
+      "path": "/redirect",
+      "children": [
+        {
+          "path": "/absolute",
+          "redirectTo": "/i/i0"
+        },
+        {
+          "path": "/relative",
+          "redirectTo": "../i/i1"
+        }
+      ]
+    }
+  ]
 }

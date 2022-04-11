@@ -4,11 +4,11 @@ describe('Relative grandchildren', () => {
   const router = {
     pages: [
       {
-        path: "'/a'",
+        path: '/a',
         children: [
           {
-            path: "'/b'",
-            children: ["'/c'", "'/d'"],
+            path: '/b',
+            children: ['/c', '/d'],
           },
         ],
       },
@@ -39,12 +39,17 @@ describe('Relative grandchildren', () => {
   });
   after(() => closeServer());
 
-  it(`Sets the route to '/a/b/c'`, writeTestCase(router, '/a/b/c', tests));
-  it(`Shows '^/a -> b/c'`, assertVisible('b/c'));
-  it(`Shows '^/a/b -> c'`, assertVisible('c'));
-  it(`Hides '^/a -> b/d' and '^/a/b -> d'`, assertHidden('b/d', 'd'));
-  it(`Sets the route to '/a/b/d'`, writeTestCase(router, '/a/b/d', tests));
-  it(`Hides '^/a -> b/c' and '^/a/b -> c'`, assertHidden('b/c', 'c'));
-  it(`Shows '^/a -> b/d'`, assertVisible('b/d'));
-  it(`Shows '^/a/b -> d'`, assertVisible('d'));
+  describe('Current route: /a/b/c', () => {
+    beforeEach(writeTestCase(router, '/a/b/c', tests));
+    it(`Shows '^/a -> b/c'`, assertVisible('b/c'));
+    it(`Shows '^/a/b -> c'`, assertVisible('c'));
+    it(`Hides '^/a -> b/d' and '^/a/b -> d'`, assertHidden('b/d', 'd'));
+  });
+
+  describe('Current route: /a/b/d', () => {
+    beforeEach(writeTestCase(router, '/a/b/d', tests));
+    it(`Hides '^/a -> b/c' and '^/a/b -> c'`, assertHidden('b/c', 'c'));
+    it(`Shows '^/a -> b/d'`, assertVisible('b/d'));
+    it(`Shows '^/a/b -> d'`, assertVisible('d'));
+  });
 });

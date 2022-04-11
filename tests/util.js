@@ -5,7 +5,7 @@ const path = require('path');
 const serveStatic = require('serve-static');
 const http = require('http');
 const assert = require('assert');
-const jsonImporter = require('node-sass-json-importer');
+const jsonImporter = require('json2scss-map-webpack-importer');
 
 const OUTPUT = path.resolve(__dirname, 'output');
 if (!fs.existsSync(OUTPUT)) fs.mkdirSync(OUTPUT);
@@ -17,7 +17,7 @@ const serve = () => {
   return () => listener.close();
 };
 
-const writeTestCase = (router, route, tests) => () => {
+const writeTestCase = (router, route, tests) => (done) => {
   const getTestDiv = (t) => {
     if (typeof t === 'string') return `<span data-route="${t}">Test</span>`;
 
@@ -26,12 +26,12 @@ const writeTestCase = (router, route, tests) => () => {
     </div>`;
   };
 
-  const sassFile = path.resolve(OUTPUT, 'main.scss');
-
   fs.writeFileSync(
     path.resolve(OUTPUT, 'router.json'),
-    JSON.stringify({ router }, null, 2)
+    JSON.stringify(router, null, 2)
   );
+
+  const sassFile = path.resolve(OUTPUT, 'main.scss');
 
   fs.writeFileSync(
     sassFile,
@@ -45,25 +45,28 @@ const writeTestCase = (router, route, tests) => () => {
     `
   );
 
-  const { css } = sass.renderSync({
-    file: sassFile,
-    outputStyle: 'compressed',
-    importer: jsonImporter(),
-    includePaths: [path.resolve(__dirname, '..', 'node_modules')],
-  });
-
-  fs.writeFileSync(
-    path.resolve(OUTPUT, 'index.html'),
-    `
-      <html>
-        <style>
-          ${css.toString()}
-        </style>
-        <div class="container" data-route-state="${route}">
-          ${tests.map((test) => getTestDiv(test)).join('')}
-        </div>
-      </html>
-    `
+  sass.render(
+    {
+      file: sassFile,
+      importer: jsonImporter(),
+    },
+    (err, { css }) => {
+      if (err) throw err;
+      fs.writeFileSync(
+        path.resolve(OUTPUT, 'index.html'),
+        `
+        <html>
+          <style>
+            ${css.toString()}
+          </style>
+          <div class="container" data-route-state="${route}">
+            ${tests.map((test) => getTestDiv(test)).join('')}
+          </div>
+        </html>
+      `
+      );
+      done();
+    }
   );
 };
 
@@ -86,14 +89,18 @@ const assertVisibility = async (test, hidden) => {
   assert.strictEqual(styles.display === 'none', hidden);
 };
 
-const assertHidden = (...ts) => async () => {
-  const tests = [].concat(ts);
-  for (const test of tests) await assertVisibility(test, true);
-};
+const assertHidden =
+  (...ts) =>
+  async () => {
+    const tests = [].concat(ts);
+    for (const test of tests) await assertVisibility(test, true);
+  };
 
-const assertVisible = (...ts) => async () => {
-  const tests = [].concat(ts);
-  for (const test of tests) await assertVisibility(test, false);
-};
+const assertVisible =
+  (...ts) =>
+  async () => {
+    const tests = [].concat(ts);
+    for (const test of tests) await assertVisibility(test, false);
+  };
 
 module.exports = { writeTestCase, serve, assertHidden, assertVisible };
