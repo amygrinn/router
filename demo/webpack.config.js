@@ -38,7 +38,7 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               sassOptions: {
-                importer: jsonImporter()
+                importer: jsonImporter(),
               },
             },
           },
