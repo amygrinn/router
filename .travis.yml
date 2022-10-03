@@ -13,9 +13,9 @@ deploy:
     on:
       branch: main
       tags: true
-      repo: tylergrinn/tygr-router
+      repo: taylorgrinn/tygr-router
     edge: true
-    email: tylergrinn@gmail.com
+    email: grinntaylor+old@gmail.com
     api_token: $NPM_TOKEN
 
   - provider: pages
