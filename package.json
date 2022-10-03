@@ -1,13 +1,13 @@
 {
-  "name": "@tygr/router",
-  "version": "1.0.4",
-  "description": "Router for tygr",
+  "name": "@taylorgrinn/router",
+  "version": "2.0.0",
+  "description": "Router built with SASS",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tylergrinn/tygr-router.git"
+    "url": "https://github.com/taylorgrinn/router.git"
   },
-  "author": "Tyler Grinn",
+  "author": "Taylor Grinn",
   "main": "lib/index.js",
   "scripts": {
     "build": "run-s clean ts demo",

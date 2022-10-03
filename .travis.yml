@@ -13,15 +13,14 @@ deploy:
     on:
       branch: main
       tags: true
-      repo: taylorgrinn/tygr-router
-    edge: true
-    email: grinntaylor+old@gmail.com
-    api_token: $NPM_TOKEN
-
+      repo: taylorgrinn/router
+    email: grinntaylor@gmail.com
+    api_key:
+      secure: 'WxC41BKZ8Y7+KVlPfPmb9xZJYfSuw1iEXpxpp6/DkbHTTS1K5Z8/5hi3ut1eHu4+p82i/AWME09n7XIoFZSSFuh8NWG0idXHurHNXNwHX2tQwcHZgYGh9pQowf3g1NGyXral5RPFZxNFfrpw0vhMVzsE61glMhsmt8TdYZ9Gd074j4cK3mNKh5us0Yc6IC7Kowdk7YFbQAIAx4SPb5yDRFJBI04vGjyMt9+6OgYX0vJgcTOHFoQj/xSkBX9dE2vZ64YHekQ6ychiuYW+BAjch1HUR223+9xYN1amU5R2vTgvA557OxyJtuEgC/41JXFO+27+ydSySnb0xdnNgPUwrxkU2mCw8HLbWwhJC4soRXS2qAQdlCwzs/bvDuV3FvbEO2AbjYbAVbTqTlAUaVvhUaga6By5cXQKq4eoqtSxUGw9cW/y3Yyn39C8rBznv6NCrCbwvGEo5wR5wSjr1yfTbu8RdfRvyp0KmMdufo3hqCH+rqQxnRfxL6uDiYgUHpb4p0DLLx/Z2fHZWmgZVNYGttln7AVsnxTZPZrixzHJygEGicwqteomqmR6Nu1Cgm2t2/7amjbAFK8kM2xp8cMKFtqbzrayjddhJuzmJkITE5F6Od2N9ZdcAnMiL/3B7JWNv5XdWjyBoL7+rLA8Nf91ONSk2fLi3dn5oTt0feazmoc='
   - provider: pages
     on:
       branch: main
-      repo: tylergrinn/tygr-router
-    edge: true
+      repo: taylorgrinn/router
     github_token: $GITHUB_TOKEN
     local_dir: dist
+    skip_cleanup: true

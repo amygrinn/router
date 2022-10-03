@@ -1,14 +1,11 @@
-# This package has moved to [@taylorgrinn/router](https://github.com/taylorgrinn/router)
+# Tay Router
 
-# Tygr Router
-
-[Demo](https://tylergrinn.github.io/tygr-router)
-
-[Forking Guide](https://github.com/tylergrinn/tygr-logo/blob/main/docs/forking.md)
+[Demo](https://taylorgrinn.github.io/router)
 
 This is a react router hook built with sass.
 
-The router layout will share as much html as it can between the different routes, allowing for smooth transitions.
+The router layout will share as much html as it can between the
+different routes, allowing for smooth transitions.
 
 ## Why?
 
@@ -45,7 +42,7 @@ See the `demo/webpack.config.js` file for an example of using react and sass wit
 ## Installation:
 
 ```cmd
-npm i --save-dev @tygr/router json2scss-map-webpack-importer
+npm i --save-dev @taylorgrinn/router json2scss-map-webpack-importer
 ```
 
 ## Step 1: Define your router
@@ -99,7 +96,7 @@ module.exports = {
 
 ```jsx
 import React from 'react';
-import useRouter from '@tygr/Router';
+import useRouter from '@taylorgrinn/router';
 import { router as routerConfig } from './router';
 
 export default function App() {
@@ -120,7 +117,7 @@ Spread the router container object returned from the `useRouter` hook over the p
 ## Step 3: use the router sass mixin
 
 ```scss
-@use '@tygr/router';
+@use '@taylorgrinn/router';
 @import 'router.js'; // Import the router you defined in step 1
 
 .router {
@@ -259,7 +256,7 @@ You may replace that logic with your own by passing content to the `router` mixi
 ## Using transitions
 
 ```scss
-@import '@tygr/router';
+@import '@talorgrinn/router';
 @import 'router.js';
 
 .router {
@@ -280,7 +277,7 @@ You may replace that logic with your own by passing content to the `router` mixi
 ## Using animations
 
 ```scss
-@import '@tygr/router';
+@import '@taylorgrinn/router';
 @import 'router.js';
 
 .router {
@@ -312,7 +309,7 @@ You may replace that logic with your own by passing content to the `router` mixi
 ## Specify styles for a specific route using the `routeChild` mixin
 
 ```scss
-@import '@tygr/router';
+@import '@taylorgrinn/router';
 @import 'router.js';
 
 .router {
@@ -334,7 +331,7 @@ The routeChild mixin takes in any number of absolute routes and applies styles t
 By using the sass parent selector `&`, you can specify different behavior for a route depending on any css selector:
 
 ```scss
-@import '@tygr/router';
+@import '@taylorgrinn/router';
 @import 'router.js';
 
 .fade {

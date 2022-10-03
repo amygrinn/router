@@ -11,7 +11,7 @@ function App() {
   return (
     <div>
       <div className="flex-col">
-        <h1>Tygr Router Example</h1>
+        <h1>Tay Router Example</h1>
         <nav>
           <div>
             <button onClick={goto('/')}>Home (/)</button>
