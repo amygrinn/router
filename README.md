@@ -1,3 +1,5 @@
+# This package has moved to [@taylorgrinn/router](https://github.com/taylorgrinn/router)
+
 # Tygr Router
 
 [Demo](https://tylergrinn.github.io/tygr-router)
